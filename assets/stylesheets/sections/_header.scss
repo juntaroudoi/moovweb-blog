@@ -1,3 +1,45 @@
-header._header {
-  
+header {
+  border-top: 2px solid $orange;
+  @include box-shadow(0 2px 0px rgba(0,0,0,0.1), inset 0 0 2px white);
+  border-bottom: 1px solid #ccc;
+  background-color: #FeFeFe;
+  .logo img {
+    width: 140px;
+    height: 20px;
+    display: block;
+    margin: 16px 0 0px 10px;
+    text-indent: -900px;
+  }
+  .header-info {
+    width: 100%;
+    display: block !important;
+    background-color: $blue;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    .text, a {
+      display: block;
+      padding: 5px;
+      border-bottom: 1px solid darken($blue, 10%);
+    }
+    .text {
+      position: relative;
+      input {
+        width: 100%;
+        font-size: 16px;
+        color: #666;
+        @include box-sizing(border-box);
+        @include border-radius(40px);
+        border: 2px solid darken($blue, 10%);
+        padding: 8px 10px 8px 30px;
+      }
+    }
+    a {
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+      border-bottom: none;
+      text-shadow: 0 1px 1px darken($blue, 25%);
+    }
+  }
 }

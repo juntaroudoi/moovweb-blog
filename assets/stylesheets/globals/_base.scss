@@ -1,39 +1,160 @@
 // Site-wide styles go here
 
-@import "bourbon/_bourbon";
+      @import "bourbon/_bourbon";
 
-@import "_vertical_rhythmic";
+      @import "_vertical_rhythmic";
 
-html {
-  height: 100%;
-  overflow: auto !important;
-}
+      $orange: #F36721;
+      $blue: #3CA3E0;
+      $green: #78C158;
+      $red: #D43631;
+      $yellow: #FFF200;
 
-body {
-  -webkit-text-size-adjust: none;
-  background: #fff;
-  color: #333;
-  font-family: "Helvetica Neue", Helvetica, Verdana;
-  position: relative;
-  min-height: 100%;
-}
+      $d_gray: #808080;
+      $gray: #bbb;
+      $l_gray: #ccc;
 
-a {
-  color: #369;
-  text-decoration: none;
-  word-wrap: break-word;
-}
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #333;
+        font-size: 16px;
+        line-height: 1.5;
+        min-height: 100%;
+        -webkit-text-size-adjust: none;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
 
-a, a:link {
-  -webkit-tap-highlight-color: rgba(225, 244, 204, 0.5);
-}
+        a {
+          color: darken($blue, 10%);
+          text-decoration: none;
+        }
+        #main {
+          margin: 10px;
+          overflow: hidden;
+        }
 
-img {
-  max-width: 100%;
-}
+        & > iframe {
+          display: none;
+        }
 
-input[type="number"]::-webkit-outer-spin-button {
-  display: none;
-}
+        article.post{
+          border-bottom: 1px solid #ddd;
+          padding: 10px 0 10px 0;
+          &:first-child {
+            padding-top: 0;
+          }
+          .post-holder {
+            .date, .meta {
+              color: $gray;
+              font-size: 12px;
+              text-transform: uppercase;
+            }
 
+            h1 {
+              font-size: 28px;
+              line-height: 1.2;
+              color: $orange;
+              a {
+                color: $orange;
+              }
+              
+            }
+            .meta {
+              overflow: hidden;
+              margin-top: 5px;
+              & > a, & > ul li {
+                float: left;
+                margin-right: 20px;
+              }
+              .cat_name {
+                span {
+                  color: #bbb;
+                }
+              }
+            }
+          }
+        }
+
+        // Search Result header
+        #main .post {
+          &.results{
+            padding: 20px 0;
+            color:#656565;
+            h1 {
+              font-size: 18px !important;
+              em {
+                font-style:normal;
+              }
+              span {
+                color:#484848;
+              }
+            }
+            p {
+              span {
+                color:#515151;
+              }
+            }
+          }
+        }
+
+        // Pagination
+        .paging {
+          text-align: right;
+          font-size: 16px;
+          padding: 22px 0 23px;
+          text-transform: uppercase;
+
+          li {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 0 0 18px;
+            &.previous { margin-left: 0; }
+            &.next { margin: 0 0 0 14px; }
+            &.previous span{padding:0 0 0 11px;}
+            &.next span{padding:0 12px 0 0;}
+            a { color: #333; }
+            &.active{
+              font-size: 18px;
+              line-height: 30px;
+              width: 30px;
+              height: 30px;
+              text-align: center;
+              color: #fffefe;
+              text-shadow: 0 1px 1px #00629c;
+              background: #3da3e0;
+              border-radius: 100%;
+              -webkit-border-radius: 100%;
+              @include box-shadow(0 1px 1px #333);
+
+            }
+          }
+        }
+      }
+
+      .clearfix:before,
+      .clearfix:after {
+          content: " "; /* 1 */
+          display: table; /* 2 */
+      }
+
+      .clearfix:after {
+          clear: both;
+      }
+
+      /*
+       * For IE 6/7 only
+       * Include this rule to trigger hasLayout and contain floats.
+       */
+
+      .clearfix {
+          *zoom: 1;
+      }
+
+
+      .mw_testing {
+        border: 2px solid purple !important;
+        background: #999;
+        overflow: hidden;
+      }
+    
 

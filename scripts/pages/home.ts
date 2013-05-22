@@ -1,1 +1,6 @@
-# Place holder/example file
+$$(".meta") {
+  $$("> a.icon > img") {
+   remove()
+  }
+  move_to("..", "bottom")
+}
