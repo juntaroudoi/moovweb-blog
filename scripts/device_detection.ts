@@ -1,4 +1,5 @@
 
+# device specific stylesheets located in assets/stylesheets
 $device_stylesheet = "main"
 match($user_agent) {
   with(/Android/) {

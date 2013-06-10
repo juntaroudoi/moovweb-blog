@@ -1,12 +1,12 @@
 ---
-- :output_file: main.js
-  :input_directory: main
-  :input_files:
-  - host_map.js
-  - http://d1topzp4nao5hp.cloudfront.net/uranium-upload/0.1.104/uranium-pretty.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/gsub.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/passthrough_ajax.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.68/auto_scroll.js
+- :output_file: main.js # This one file will contain all JavaScript files bundled together
+  :input_directory: main # this is the directory that Fusion will search for more files
+  :input_files: # list of JavaScript files to be bundled
+  - host_map.js # URL rewriting functions
+  - http://d1topzp4nao5hp.cloudfront.net/uranium-upload/0.1.104/uranium-pretty.js # Uranium widgets
+  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/gsub.js # plutonium library component; see docs
+  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/passthrough_ajax.js # plutonium library component; see docs
+  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.68/auto_scroll.js # plutonium library providing auto scroll functionality (removes URL bar)
 
 
 

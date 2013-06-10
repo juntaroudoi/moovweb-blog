@@ -20,7 +20,7 @@ match($status) {
     match($path) {
       with(/^\/$|^\/\?/) {
         log("--> Importing pages/home.ts in mappings.ts")
-        @import pages/home.ts
+        @import pages/home.ts # this is the only page that will be transformed...
       }
       else() {
         log("--> No page match in mappings.ts")
