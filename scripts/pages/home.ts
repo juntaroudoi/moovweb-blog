@@ -4,5 +4,3 @@ $$(".meta") { # select elements with CSS: scope into any element with class of '
   } # 'end > a.icon > img' scope
   move_to("..", "bottom") # move entire element with class of 'meta' to the bottom of its parent node
 } # end 'class="meta" scope
-
-log("_________________EXECUTING HOME.ts")
