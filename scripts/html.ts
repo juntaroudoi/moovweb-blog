@@ -19,8 +19,8 @@ $("/html") {
 
   add_assets() # add content from assets folder
 
-  @import sections/header.ts # import header script - code in this script will be applied to all pages that pass through Moovweb
-  @import sections/footer.ts # import footer script - code in this script will be applied to all pages that pass through Moovweb
+  @import sections/header.ts # import header script - code in this script will be applied to all html pages that pass through Moovweb
+  @import sections/footer.ts # import footer script - code in this script will be applied to all html pages that pass through Moovweb
 
   @import mappings.ts # import mappings script - only execute code that matches the mapping
 }
