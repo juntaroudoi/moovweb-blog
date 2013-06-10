@@ -13,4 +13,4 @@ project.gemspec
 assets/javascript/.remote/
 assets/javascript/main.js
 assets/javascript/host_map.js
-*.css
+assets/stylesheets/.css
