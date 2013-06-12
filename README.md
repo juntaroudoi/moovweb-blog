@@ -8,7 +8,7 @@ This is a sample project, so you will find the code commented to help you follow
 
 To run this project, you must have the Moovweb SDK installed on your system. Installation is easy - just go to [the download page on the Moovweb site](http://console.moovweb.com/download) to download and install.
 
-As well as following the tutorial mention above, we have lots of informative guides, videos, live help, documentation, and even a book on how to use Moovweb. You should be able to get up and running in 30 minutes if you visit [console.moovweb.com](http://console.moovweb.com).
+As well as following the tutorial mentioned above, we have lots of informative guides, videos, live help, documentation, and even a book on how to use Moovweb. You should be able to get up and running in 30 minutes if you visit [console.moovweb.com](http://console.moovweb.com).
 
 You might find [the page about the scripts folder](http://console.moovweb.com/learn/reference/configuration/pages) useful for starting to write Tritium, and our [documents on the stylesheets folder](http://console.moovweb.com/learn/reference/configuration/stylesheet) for information on how we structure our stylesheets.
 
@@ -32,7 +32,8 @@ Moovweb uses a git-based deployment system. To deploy, just type
 See detailed documentation for Moovweb at [console.moovweb.com](http://console.moovweb.com).
 
 ## Domains
-Remember to put all domains you're going to hit in your etc/hosts or to run your server with the `-auto-hosts=true` option.
+
+If you don't run the server with the `--auto-hosts` command, remember to put all domains you're going to hit in your etc/hosts.
 
 
     127.0.0.1   mlocal.blog.moovweb.com
