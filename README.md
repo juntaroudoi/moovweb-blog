@@ -10,7 +10,7 @@ To run this project, you must have the Moovweb SDK installed on your system. Ins
 
 As well as following the tutorial mentioned above, we have lots of informative guides, videos, live help, documentation, and even a book on how to use Moovweb. You should be able to get up and running in 30 minutes if you visit [console.moovweb.com](http://console.moovweb.com).
 
-You might find [the page about the scripts folder](http://console.moovweb.com/learn/reference/configuration/pages) useful for starting to write Tritium, and our [documents on the stylesheets folder](http://console.moovweb.com/learn/reference/configuration/stylesheet) for information on how we structure our stylesheets.
+You might find [the page about the scripts folder](http://console.moovweb.com/learn/docs/local/project_files) useful for starting to write Tritium, and our [documents on the stylesheets folder](http://console.moovweb.com/learn/docs/configuration/stylesheet) for information on how we structure our stylesheets.
 
 ## Launching
 
