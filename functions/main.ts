@@ -3,7 +3,7 @@
 ####################
 
 # BTN DELEGATE
-# 
+#
 # EXAMPLE CSS
 # .mw_hide2 {
 #   visibility: hidden!important;
@@ -46,7 +46,7 @@
 #
 #
 # EXAMPLE::
-# 
+#
 # table_dump(".//table") {
 #   $("./div[class='some_class']") {
 #     add_class("mw_more_scopes")
@@ -121,7 +121,7 @@
 # Add Canonical Tag
 @func XMLNode.add_canonical_tag() {
   $("/html/head") {
-    # Inject a canonical link as long as there isn't already one. 
+    # Inject a canonical link as long as there isn't already one.
     $canonical_found = "false"
     $(".//link[@rel='canonical']") {
       $canonical_found = "true"
@@ -162,10 +162,10 @@
 @func XMLNode.add_mobile_stylesheet() {
   $("/html/head") {
     insert("link", rel: "stylesheet", type: "text/css", href: sass($device_stylesheet), data-mw-keep: "true")
-  }  
+  }
 }
 
-# Add the mobile javascript 
+# Add the mobile javascript
 # Using the variable-setting logic as relying solely on presence of script tags
 # is dangerous when removing js or simply on sites with no js.
 @func XMLNode.add_mobile_javascript() {
@@ -173,7 +173,7 @@
     $noscript="true"
     $("./script[1]") {
       $noscript="false"
-      insert_before("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main.js")) 
+      insert_before("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main.js"))
     }
     match($noscript) {
       with("true") {
@@ -250,7 +250,7 @@
   rewrite_meta_refresh()
 }
 
-# Absolutize Items 
+# Absolutize Items
 @func XMLNode.absolutize_srcs() {
   # Absolutize IMG and SCRIPT SRCs
   var("slash_path") {
@@ -309,4 +309,16 @@
       name("data-ur-ll-src")
     }
   }
+}
+
+@func Text.inferred_content_type() {
+  $inferred_content_type = $content_type
+  match($x_requested_with, /XMLHttpRequest/) {
+    match($content_type, /html/) {
+      match(this(), /\A\s*(\[.*\]|{.*}|".*"|\d+|true|false)\s*\Z/m) {
+        $inferred_content_type = "application/json"
+      }
+    }
+  }
+  $inferred_content_type
 }
