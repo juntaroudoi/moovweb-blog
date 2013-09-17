@@ -18,7 +18,7 @@ Typically, on Mac or Linux, just browse to this project folder in a terminal and
 
     sudo moov server --auto-hosts
 
-Then, just browse to [mlocal.blog.moovweb.com](http://mlocal.blog.moovweb.com) and you are ready to start developing!
+Then, just browse to [mlocal.blog.moovdemos.com](http://mlocal.blog.moovdemos.com) and you are ready to start developing!
 
 ## Deployment
 
@@ -36,4 +36,4 @@ See detailed documentation for Moovweb at [console.moovweb.com](http://console.m
 If you don't run the server with the `--auto-hosts` command, remember to put all domains you're going to hit in your etc/hosts.
 
 
-    127.0.0.1   mlocal.blog.moovweb.com
+    127.0.0.1   mlocal.blog.moovdemos.com
