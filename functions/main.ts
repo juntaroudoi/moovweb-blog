@@ -1,52 +1,21 @@
+
 ####################
 ### Site Functions
 ####################
 
-# BTN DELEGATE
-#
-# EXAMPLE CSS
-# .mw_hide2 {
-#   visibility: hidden!important;
-#   position: absolute!important;
-#   left: -99999px!important;
-# }
-
-#  EXAMPLE TS
-#
-#  $(".//input[@type='submit']") {
-#    attributes(id: "mw_id", alt: "mw_alt")
-#
-#    btn_delegate() {
-#      add_class("mw_btn_500000000050")
-#      // in a pinch you can do other scoping in here
-#    }
-#  }
-
-@func XMLNode.btn_delegate() {
-  %class = fetch("./@class")
-  %mw_id = concat("mw_", name(), "_", fetch("./@id"))
-  %text = fetch("./@alt")
-
-  %text {
-    replace(/_/, " ")
-  }
-
-  insert_before("div", %text, class: %class) {
-    attributes(onclick: concat("var event=arguments[0]||window.event;event.preventDefault;event.stopPropagation;x$('[data-mw-btn-id=\"", %mw_id, "\"]').click()"))
-
-    yield()
-  }
-
-  attributes(data-mw-btn-id: %mw_id)
-  add_class("mw_hide2")
+@func Text.protect_xmlns() {
+  replace(/\<(\/)?(\w+)\:(\w+)(\>?)/, "<$1$2_mwns_$3$4")
 }
 
+@func Text.restore_xmlns() {
+  replace(/\<(\/?)(\w+)_mwns_(\w+)(\>?)/, "<$1$2:$3$4")
+}
 
 # A compendium of ways to "dump" tables
 #
 #
 # EXAMPLE::
-#
+# 
 # table_dump(".//table") {
 #   $("./div[class='some_class']") {
 #     add_class("mw_more_scopes")
@@ -54,7 +23,7 @@
 # }
 #
 #
-@func XMLNode.table_dump(Text %xpath){
+@func XMLNode.table_dump(Text %xpath) {
   $(%xpath) {
     name("div")
     add_class("mw_was_table")
@@ -121,7 +90,7 @@
 # Add Canonical Tag
 @func XMLNode.add_canonical_tag() {
   $("/html/head") {
-    # Inject a canonical link as long as there isn't already one.
+    # Inject a canonical link as long as there isn't already one. 
     $canonical_found = "false"
     $(".//link[@rel='canonical']") {
       $canonical_found = "true"
@@ -131,6 +100,8 @@
         insert("link", rel: "canonical", href: concat("http://", $source_host, $path))
       }
     }
+    # Remove any alternate tags
+    remove(".//link[@rel='alternate']")
   }
 }
 
@@ -138,13 +109,12 @@
 @func XMLNode.clean_mobile_meta_tags() {
   remove_meta_tags()
   insert_mobile_meta_tags()
-  add_canonical_tag()
 }
 
 # Add the favicon
 @func XMLNode.add_favicon() {
   $("/html/head") {
-    insert("link", rel: "shortcut icon", href: asset("images/favicon.ico"))
+    insert("link", rel: "shortcut icon", href: asset("images/"+$layer+"/favicon.ico"))
   }
 }
 
@@ -153,19 +123,19 @@
   $("/html/head") {
     # The images below are placeholders, get real ones from the client
     # Change to -precomposed to not have the glass effect on the icons
-    insert("link", rel: "apple-touch-icon", href: asset("images/apple-touch-icon-57x57.png"))
-    insert("link", rel: "apple-touch-icon", href: asset("images/apple-touch-icon-114x114.png"))
+    insert("link", rel: "apple-touch-icon", href: asset("images/"+$layer+"/apple-touch-icon-57x57.png"))
+    insert("link", rel: "apple-touch-icon", href: asset("images/"+$layer+"/apple-touch-icon-114x114.png"))
   }
 }
 
 # Add the generated stylesheet
 @func XMLNode.add_mobile_stylesheet() {
   $("/html/head") {
-    insert("link", rel: "stylesheet", type: "text/css", href: sass($device_stylesheet), data-mw-keep: "true")
-  }
+    insert("link", rel: "stylesheet", type: "text/css", href: sass($layer+"/main"), data-mw-keep: "true")
+  }  
 }
 
-# Add the mobile javascript
+# Add the mobile javascript 
 # Using the variable-setting logic as relying solely on presence of script tags
 # is dangerous when removing js or simply on sites with no js.
 @func XMLNode.add_mobile_javascript() {
@@ -173,11 +143,11 @@
     $noscript="true"
     $("./script[1]") {
       $noscript="false"
-      insert_before("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main.js"))
+      insert_before("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main_"+$layer+".js"))
     }
     match($noscript) {
       with("true") {
-        insert_bottom("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main.js"))
+        insert_bottom("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main_"+$layer+".js"))
       }
     }
   }
@@ -250,72 +220,11 @@
   rewrite_meta_refresh()
 }
 
-# Absolutize Items
-@func XMLNode.absolutize_srcs() {
-  # Absolutize IMG and SCRIPT SRCs
-  var("slash_path") {
-    # the 'slash_path' is the path of this page without anything following it's last slash
-    set($path)
-    replace(/[^\/]+$/, "")
-    # turn empty string into a single slash because this is the only thing separating the host from the path relative path
-    replace(/^$/, "/")
-  }
-  # Find images and scripts that link to an external host
-  $(".//img|.//script[@src]") {
-    # GOTCHAS :: Watch out for captcha images, they most likely should
-    # not be absolutized
-    $src = fetch("./@src")
-    match($rewriter_url) {
-      not(/false/) {
-        # Do nothing :: Use base tag value
-      }
-      else() {
-        $rewriter_url = $source_host
-      }
-    }
-    # skip URLs which: are empty, have a host (//www.example.com), or have a protocol (http:// or mailto:)
-    match($src, /^(?![a-z]+\:)(?!\/\/)(?!$)/) {
-      attribute("src") {
-        value() {
-          match($src) {
-            with(/^\//) {
-              # host-relative URL: just add the host
-              prepend(concat("//", $rewriter_url))
-            }
-            else() {
-              # path-relative URL: add the host and the path
-              prepend(concat("//", $rewriter_url, $slash_path))
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@func XMLNode.relocate_scripts() {
-  $("/html/body/script") {
-    move_to("/html/body", "bottom")
-  }
-}
-
-# This function lateloads all images and moves scripts to the bottom of the body, place function at end of html.ts
-@func XMLNode.lateload() {
-  $(".//script") {
-    move_to("//html/body")
-  }
-  $(".//img") {
-    attribute("src") {
-      name("data-ur-ll-src")
-    }
-  }
-}
-
 @func Text.inferred_content_type() {
   $inferred_content_type = $content_type
   match($x_requested_with, /XMLHttpRequest/) {
     match($content_type, /html/) {
-      match(this(), /\A\s*(\[.*\]|{.*}|".*"|\d+|true|false)\s*\Z/m) {
+      match(this(), /\A\s*(\[.*\]|{.*}|".*"|'.*'|\d+|true|false)\s*\Z/m) {
         $inferred_content_type = "application/json"
       }
     }

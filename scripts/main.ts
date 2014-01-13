@@ -1,23 +1,27 @@
 # The main file executed by Tritium. The start of all other files.
 
-match(inferred_content_type()) {
+# Keep track of what layer we're currently running
+$layer = env("layers")
+
+# this ensures that the 'origin' layer will not be transformed at all
+# remove this match if you want to transform your origin website
+match_not($layer, "origin") {
+  match(inferred_content_type()) {
     with(/html/) {
-    replace(/fb:/, "fbn_") # Rewrite the xmlns facebook nodes before the html parser clobbers them
+      # Protect any XML namespace nodes
+      protect_xmlns()
 
-    # Force UTF-8 encoding. If you'd like to auto-detect the encoding,
-    # simply remove the "UTF-8" argument.  e.g. html(){ ... }
-    html("UTF-8") {
-      @import device_detection.ts
-
-      @import html.ts
+      # Force UTF-8 encoding. If you'd like to auto-detect the encoding,
+      # simply remove the "UTF-8" argument.  e.g. html(){ ... }
+      html("UTF-8") {
+        # The @optional means that it will only get loaded if it exists
+        @optional "@/html.ts"
+      }
+      # Restore XML namespace nodes
+      restore_xmlns()
     }
-
-    replace(/fbn_/, "fb:") # Rewrite the xmlns facebook nodes to restore them
   }
-  # with(/javascript/) {
-  #   @import ajax.ts
-  # }
   else() {
-    log("Passing through " + $detected_content_type + " unmodified.")
+    log("Passing through " + $inferred_content_type + " unmodified.")
   }
 }
