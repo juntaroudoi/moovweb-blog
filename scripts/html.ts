@@ -7,7 +7,17 @@ $("/html") {
   remove_all_styles()
   remove_html_comments()
 
-  add_assets()
+  match($layer) {
+    not("") {
+      add_assets()
+    }
+    # else() {
+    #   $asset_images = "images"
+    #   $asset_js = "javascript/main.js"
+    #   $asset_stylesheet = "main"
+    #   add_assets()
+    # }
+  }
 
   @optional "@/sections/header.ts"
   @optional "@/sections/footer.ts"

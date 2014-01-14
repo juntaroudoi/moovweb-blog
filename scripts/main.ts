@@ -1,7 +1,7 @@
 # The main file executed by Tritium. The start of all other files.
 
-# Keep track of what layer we're currently running
-$layer = env("layers")
+# layer support
+@import layers.ts
 
 # this ensures that the 'origin' layer will not be transformed at all
 # remove this match if you want to transform your origin website

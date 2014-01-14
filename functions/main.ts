@@ -123,15 +123,15 @@
   $("/html/head") {
     # The images below are placeholders, get real ones from the client
     # Change to -precomposed to not have the glass effect on the icons
-    insert("link", rel: "apple-touch-icon", href: asset("images/"+$layer+"/apple-touch-icon-57x57.png"))
-    insert("link", rel: "apple-touch-icon", href: asset("images/"+$layer+"/apple-touch-icon-114x114.png"))
+    insert("link", rel: "apple-touch-icon", href: asset($asset_images + "apple-touch-icon-57x57.png"))
+    insert("link", rel: "apple-touch-icon", href: asset($asset_images + "apple-touch-icon-114x114.png"))
   }
 }
 
 # Add the generated stylesheet
 @func XMLNode.add_layer_stylesheet() {
   $("/html/head") {
-    insert("link", rel: "stylesheet", type: "text/css", href: sass($layer+"/main"), data-mw-keep: "true")
+    insert("link", rel: "stylesheet", type: "text/css", href: sass($asset_stylesheet), data-mw-keep: "true")
   }
 }
 
@@ -143,11 +143,11 @@
     $noscript="true"
     $("./script[1]") {
       $noscript="false"
-      insert_before("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main_"+$layer+".js"))
+      insert_before("script", data-keep: "true", type: "text/javascript", src: asset($asset_js))
     }
     match($noscript) {
       with("true") {
-        insert_bottom("script", data-keep: "true", type: "text/javascript", src: asset("javascript/main_"+$layer+".js"))
+        insert_bottom("script", data-keep: "true", type: "text/javascript", src: asset($asset_js))
       }
     }
   }
