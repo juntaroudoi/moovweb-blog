@@ -14,9 +14,9 @@ match_not($layer, "origin") {
       # Force UTF-8 encoding. If you'd like to auto-detect the encoding,
       # simply remove the "UTF-8" argument.  e.g. html(){ ... }
       html("UTF-8") {
-        # The @optional means that it will only get loaded if it exists
-        @optional "@/html.ts"
+        @import "html.ts"
       }
+
       # Restore XML namespace nodes
       restore_xmlns()
     }

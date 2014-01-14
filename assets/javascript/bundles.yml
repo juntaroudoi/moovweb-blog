@@ -1,6 +1,5 @@
 ---
-- :output_file: main_mobile.js
-  :input_directory: mobile
+- :output_file: general.js
   :input_files:
   - host_map.js
   - http://d1topzp4nao5hp.cloudfront.net/uranium-upload/0.1.104/uranium-pretty.js
@@ -8,11 +7,12 @@
   - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/passthrough_ajax.js
   - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.68/auto_scroll.js
 
+- :output_file: main_mobile.js
+  :input_directory: mobile
+  :input_files:
+  - general.js
+
 - :output_file: main_tablet.js
   :input_directory: tablet
   :input_files:
-  - host_map.js
-  - http://d1topzp4nao5hp.cloudfront.net/uranium-upload/0.1.104/uranium-pretty.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/gsub.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.73/passthrough_ajax.js
-  - http://d1topzp4nao5hp.cloudfront.net/plutonium-upload/0.1.68/auto_scroll.js
+  - general.js

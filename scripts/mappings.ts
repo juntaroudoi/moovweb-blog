@@ -19,8 +19,9 @@ match($status) {
 
     match($path) {
       with(/^\/$|^\/\?/) {
-        log("--> Importing pages/home.ts in mappings.ts")
-        @import pages/home.ts
+        log("--> Importing " + $layer + "/pages/home.ts in mappings.ts")
+        @optional "@/pages/home.ts"
+        @optional "@/layer_transforms.ts"
       }
       else() {
         log("--> No page match in mappings.ts")
@@ -31,7 +32,6 @@ match($status) {
   else() {
     # not 200 or 302 response status
     log("--> STATUS: " + $status + " assuming its an error code pages/error.ts")
-    @import pages/error.ts
   }
 
 }

@@ -15,7 +15,7 @@
 #
 #
 # EXAMPLE::
-# 
+#
 # table_dump(".//table") {
 #   $("./div[class='some_class']") {
 #     add_class("mw_more_scopes")
@@ -90,7 +90,7 @@
 # Add Canonical Tag
 @func XMLNode.add_canonical_tag() {
   $("/html/head") {
-    # Inject a canonical link as long as there isn't already one. 
+    # Inject a canonical link as long as there isn't already one.
     $canonical_found = "false"
     $(".//link[@rel='canonical']") {
       $canonical_found = "true"
@@ -129,16 +129,16 @@
 }
 
 # Add the generated stylesheet
-@func XMLNode.add_mobile_stylesheet() {
+@func XMLNode.add_layer_stylesheet() {
   $("/html/head") {
     insert("link", rel: "stylesheet", type: "text/css", href: sass($layer+"/main"), data-mw-keep: "true")
-  }  
+  }
 }
 
-# Add the mobile javascript 
+# Add the mobile javascript
 # Using the variable-setting logic as relying solely on presence of script tags
 # is dangerous when removing js or simply on sites with no js.
-@func XMLNode.add_mobile_javascript() {
+@func XMLNode.add_layer_javascript() {
   $("/html/head") {
     $noscript="true"
     $("./script[1]") {
@@ -157,8 +157,8 @@
 @func XMLNode.add_assets() {
   add_favicon()
   add_apple_touch_icons()
-  add_mobile_stylesheet()
-  add_mobile_javascript()
+  add_layer_stylesheet()
+  add_layer_javascript()
 }
 
 # Rewrite meta redirects

@@ -9,13 +9,10 @@ $("/html") {
 
   add_assets()
 
-  # @import sections/header.ts
-  # @import sections/footer.ts
+  @optional "@/sections/header.ts"
+  @optional "@/sections/footer.ts"
 
-  # @import mappings.ts
-
-  remove("//body")
-  insert("body","Tablet site coming soon..")
+  @import "mappings.ts"
 
   highlight_development()
 
