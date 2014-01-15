@@ -1,11 +1,11 @@
 # The main file executed by Tritium. The start of all other files.
 
 # layer support
-@import layers.ts
+@import layer_config.ts
 
-# this ensures that the 'origin' layer will not be transformed at all
+# if there is no layer specified, the origin website will just pass through
 # remove this match if you want to transform your origin website
-match_not($layer, "origin") {
+match_not($layer, "") {
   match(inferred_content_type()) {
     with(/html/) {
       # Protect any XML namespace nodes

@@ -2,5 +2,5 @@
 	"host_map": [
 		"blog.moovdemos.com => 64.13.232.64"
 	],
-  "layers": [ "origin", "mobile", "tablet"]
+  "layers": [ "mobile", "tablet"]
 }
